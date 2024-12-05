@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio - Dipesh Paul</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script>
+    gsap.registerPlugin(ScrollTrigger);
+  </script>
+  <style>
+    /* Global Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #181818;
+      color: #ffffff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* Header Section */
+    header {
+      padding: 2rem 0;
+      position: relative;
+    }
+
+    .logo {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 3rem; /* Add space between logo and intro */
+    }
+
+    .logo img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .logo h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .grid-background {
+      background-image: linear-gradient(transparent 1px, rgba(255, 255, 255, 0.1) 1px);
+      background-size: 40px 40px;
+      padding: 5rem 0;
+    }
+
+    .intro {
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      position: relative;
+      margin-top: 5rem; /* Extra margin to create space between logo and intro */
+    }
+
+    .profile-picture {
+      border-radius: 10px;
+      overflow: hidden;
+      width: 270px;
+      height: 480px; /* 9:16 aspect ratio */
+      flex-shrink: 0;
+    }
+
+    .profile-picture img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .intro-content {
+      animation: fadeInText 2s ease-in-out;
+    }
+    
+
+    @keyframes fadeInText {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .intro-content h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .highlight {
+      color: #a78bfa;
+    }
+
+    .icon-list {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .icon-list a {
+      font-size: 1.5rem;
+      color: #9ca3af;
+      transition: color 0.3s;
+    }
+
+    .icon-list a:hover {
+      color: #a78bfa;
+    }
+
+      /* Career Section */
+    section.career {
+      display: flex;
+      flex-direction: row;
+      padding: 4rem 0;
+      gap: 2rem;
+      height: 100vh;
+    }
+
+    section.career {
+        -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+        scrollbar-width: none;     /* Hide scrollbar for Firefox */
+    }
+
+    section.career::-webkit-scrollbar {
+        display: none;  /* Hide scrollbar for Chrome, Safari and Opera */
+    }
+
+
+     .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .career-left {
+      flex: 1;
+      overflow-y: auto;
+      padding-left: 10rem;
+      -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+      scrollbar-width: none;
+      scroll-behavior: smooth;
+    }
+
+    .career-left::-webkit-scrollbar {
+        display: none;  /* Hide scrollbar for Chrome, Safari, and Opera */
+    }
+
+    .career-left::-webkit-scrollbar-thumb {
+      background-color: #6b7280;
+      border-radius: 4px;
+    }
+
+    .career-item {
+      margin-bottom: 2rem;
+    }
+
+    .career-item h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+      transition: color 0.3s ease;
+    }
+
+    .career-item p {
+      color: #9ca3af;
+      margin: 0.5rem 0;
+    }
+
+    .career-item ul {
+      list-style: none;
+      margin: 1rem 0;
+      padding-left: 1rem;
+    }
+
+    .career-item ul li {
+      position: relative;
+      margin-bottom: 0.5rem;
+    }
+
+    .career-item ul li::before {
+      content: "•";
+      position: absolute;
+      left: -1rem;
+      color: #a78bfa;
+    }
+
+    .career-item.active h3 {
+      color: #a78bfa;
+    }
+
+    .career-right {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .career-right img {
+      max-width: 100%;
+      max-height: 80%;
+      border-radius: 10px;
+      opacity: 0;
+      position: absolute;
+      transform: scale(0.9);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .career-right img.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+
+    /* Technologies Section */
+    .technology-card {
+      background-color: #2e2e2e;
+      display: flex;
+      align-items: center;
+      padding: 16px;
+      border-radius: 12px;
+      gap: 16px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      flex: 0 0 auto; /* Ensures cards don't shrink */
+    }
+
+    .technology-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    }
+
+    .technology-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .figma {
+      background-color: #0acf83;
+    }
+
+    .typescript {
+      background-color: #007acc;
+    }
+
+    .react {
+      background-color: #61dafb;
+    }
+
+    .nextjs {
+      background-color: #000000;
+      border: 1px solid #ffffff;
+    }
+
+    .transformers {
+      background-color: #002e42;
+    }
+
+    .git {
+      background-color: #f14e32;
+    }
+
+    .prompt-engineering {
+      background-color: #600fe3;
+    }
+
+    .langchain {
+      background-color: #3ecf8e;
+    }
+
+    .tensorflow {
+      background-color: orange;
+    }
+
+    .scroll-container {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding-bottom: 16px;
+      scrollbar-width: thin; /* For Firefox */
+    }
+
+    .scroll-container::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .scroll-container::-webkit-scrollbar-thumb {
+      background: #444;
+      border-radius: 4px;
+    }
+
+    .scroll-container::-webkit-scrollbar-track {
+      background: #222;
+    }
+
+
+    .flex {
+      display: flex;
+    }
+
+    .flex-row {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .flex-1 {
+      flex: 1;
+      padding: 1rem;
+      background-color: #242424;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .flex-1:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    }
+    /* Footer Section */
+    footer {
+      padding: 2rem 0;
+      text-align: center;
+    }
+
+    footer a {
+      color: #a78bfa;
+      margin: 0 0.5rem;
+      font-size: 1.2rem;
+    }
+
+    footer a:hover {
+      color: #ffffff;
+    }
+
+    /* Fade in animation */
+    .animate-fade-in {
+      opacity: 0;
+      animation: fadeIn 0.8s ease-in forwards;
+    }
+
+    /* Slide up animation */
+    .animate-slide-up {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: slideUp 0.8s ease-out forwards;
+    }
+
+    /* Slide right animation */
+    .animate-slide-right {
+      opacity: 0;
+      transform: translateX(-20px);
+      animation: slideRight 0.8s ease-out forwards;
+    }
+
+    /* Slide left animation */
+    .animate-slide-left {
+      opacity: 0;
+      transform: translateX(20px);
+      animation: slideLeft 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideRight {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes slideLeft {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Optional: Add animation delay for staggered effect */
+    .technology-card:nth-child(2) { animation-delay: 0.2s; }
+    .technology-card:nth-child(3) { animation-delay: 0.4s; }
+    .technology-card:nth-child(4) { animation-delay: 0.6s; }
+
+    /* Add these styles to your existing CSS */
+    .typewriter {
+      overflow: hidden;
+      border-right: 2px solid #a78bfa;
+      white-space: nowrap;
+      margin: 0;
+      animation: 
+        typing 3.5s steps(40, end),
+        blink-caret 0.75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #a78bfa }
+    }
+  </style>
+</head>
+<body>
+  <!-- Logo -->
+  <header class="container">
+    
+    <div class="logo">
+      <h1>Dipesh Paul</h1>
+    </div>
+
+    <!-- Main Intro -->
+    <div class="intro container">
+      <div class="profile-picture">
+        <img src="./assets/profile.jpg" alt="Dipesh Paul">
+      </div>
+      <div class="intro-content">
+        <h1 style="font-size: 2.5rem;">
+          I'm Dipesh Paul, and blending<br>
+          <span class="highlight">Machine Learning & Generative AI</span> <br>
+          to redefine innovation ❤️
+        </h1>
+        <p class="typewriter">Data Scientist / AI Engineer (6+ years)</p>
+        <div class="icon-list">
+          <a href="#" title="LinkedIn">🔗</a>
+          <a href="#" title="GitHub">🐙</a>
+          <a href="#" title="Email">✉️</a>
+          <a href="#" title="Portfolio">📅</a>
+        </div>
+      </div>
+    </div>
+  </header>
+  <hr>
+
+    <!-- Career Section -->
+    <h2 class="section-title" style="margin-top: 2rem;">Experience</h2>
+    <section class="career">
+        <!-- Left Side -->
+        <div class="career-left">
+          <div class="career-item" data-career="SYSTANGO">
+            <h3>Systango Technologies, Indore</h3>
+            <p>Senior Data Scientist</p>
+            <p>Dec 2023 - Present</p>
+            <ul>
+              <li>GenAI RAG based chatbot solutions for enterprise clients.</li>
+              <li>Quantized LLM fine-tuning and prompt engineering for global clients.</li>
+              <li>Architected and developed scalable and GenAI powered products.</li>
+              <li>Integrated AI for predictive analytics.</li>
+              <li>Worked on cutting edge generative AI models and pipelines i.e. GPT-4o, Bedrock, Gemini, etc.</li>
+            </ul>
+          </div>
+          <div class="career-item" data-career="ZDALY">
+            <h3>Zdaly, Bangalore</h3>
+            <p>Senior Machine Learning Engineer</p>
+            <p>Jan 2023 - July 2023</p>
+            <ul>
+              <li>Integrated AI for predictive analytics.</li>
+              <li>Developed and deployed ML models for customer retention.</li>
+              <li>Integrated AI for predictive analytics.</li>
+              <li>Implemented ML pipelines for real-time predictions for customer retention.</li>
+            </ul>
+          </div>
+          <div class="career-item" data-career="GSLAB">
+            <h3>GS Lab, Pune</h3>
+            <p>Machine Learning Engineer</p>
+            <p>Jan 2022 - Dec 2022</p>
+            <ul>
+              <li>Developed and deployed ML models for customer retention.</li>
+              <li>Integrated AI for predictive analytics.</li>
+              <li>Implemented ML pipelines for real-time predictions for customer retention.</li>
+              <li>Worked on virtualization based ML services product development.</li>
+            </ul>
+          </div>
+          <div class="career-item" data-career="CALSOFT">
+            <h3>Calsoft, Pune</h3>
+            <p>Machine Learning Engineer</p>
+            <p>Jan 2019 - Dec 2021</p>
+            <ul>
+              <li>Build the custom CNN model with U-Net and using Keras.</li>
+              <li>Trained the model using the images dataset of approximately 143,000 images of Humans and Cartoon.</li>
+              <li>Predicted thegrowth of markets using Keras with Facebook's Roberta, LSTM, ULMFit, etc. to fine-tune the model.</li>
+              <li>Worked custom ticket analysis and prediction model using Keras.</li>
+            </ul>
+          </div>
+        </div>
+  
+        <!-- Right Side -->
+        <div class="career-right">
+          <img src="assets/systango.jpg" alt="SYSTANGO" data-career-image="SYSTANGO" class="active">
+          <img src="assets/zdaly.jpeg" alt="ZDALY" data-career-image="ZDALY">
+          <img src="assets/gslab.jpg" alt="GSLAB" data-career-image="GSLAB">
+          <img src="assets/calsoft-office.jpg" alt="CALSOFT" data-career-image="CALSOFT">
+        </div>
+    </section>
+    <hr>
+
+
+    <!-- Current Technologies Section -->
+    <section class="container mx-auto mt-16 px-4 container">
+    <div class="text-center mb-8">
+      <h2 class="text-4xl font-bold section-title">Skills & Technologies</h2>
+      <p class="text-gray-400 mt-2 max-w-2xl mx-auto">
+        I'm proficient in a range of modern technologies that empower me to build highly functional solutions. These are
+        some of my main technologies.
+      </p>
+    </div>
+    <!-- Technology Cards -->
+    <div class="scroll-container">
+      <div class="technology-card animate-fade-in">
+        <div class="technology-icon figma">ML</div>
+        <div>
+          <h3 class="text-xl font-semibold">Machine Learning</h3>
+        </div>
+      </div>
+      <div class="technology-card animate-fade-in">
+        <div class="technology-icon typescript">DL</div>
+        <div>
+          <h3 class="text-xl font-semibold">Deep Learning</h3>
+        </div>
+      </div>
+      <div class="technology-card animate-fade-in">
+        <div class="technology-icon react">AI</div>
+        <div>
+          <h3 class="text-xl font-semibold">Artificial Intelligence</h3>
+        </div>
+      </div>
+      <div class="technology-card animate-fade-in">
+        <div class="technology-icon nextjs">G</div>
+        <div>
+          <h3 class="text-xl font-semibold">GenAI</h3>
+        </div>
+      </div>
+    </div>
+
+    <!-- Technology Cards -->
+    <div class="scroll-container">
+        <div class="technology-card animate-slide-up">
+          <div class="technology-icon transformers">T</div>
+          <div>
+            <h3 class="text-xl font-semibold">Transformers</h3>
+            <p class="text-gray-400 text-sm">DL Library</p>
+          </div>
+        </div>
+        <div class="technology-card animate-slide-up">
+          <div class="technology-icon git">G</div>
+          <div>
+            <h3 class="text-xl font-semibold">Git</h3>
+            <p class="text-gray-400 text-sm">Version Control</p>
+          </div>
+        </div>
+        <div class="technology-card animate-slide-up">
+          <div class="technology-icon prompt-engineering">PE</div>
+          <div>
+            <h3 class="text-xl font-semibold">Prompt Engineering</h3>
+            <p class="text-gray-400 text-sm">GenAI Engineering</p>
+          </div>
+        </div>
+        <div class="technology-card animate-slide-up">
+          <div class="technology-icon langchain">A</div>
+          <div>
+            <h3 class="text-xl font-semibold">Langchain</h3>
+            <p class="text-gray-400 text-sm">LLM Framework</p>
+          </div>
+        </div>
+      
+      <div class="technology-card animate-slide-up">
+          <div class="technology-icon tensorflow">TF</div>
+          <div>
+            <h3 class="text-xl font-semibold">Tensorflow</h3>
+            <p class="text-gray-400 text-sm">AI Framework</p>
+          </div>
+        </div>
+      </div>
+
+    <!-- Some other experties -->
+    <div class="container">
+        <h2 class="animate-fade-in" style="text-align: center; margin-bottom: 2rem;">Some Other Expertise</h2>
+        <!-- Divide into three columns -->
+        <div class="flex flex-row">
+          <div class="flex-1 animate-slide-right">
+            <p>LLM Fine-Tuning</p>
+            <p>Prompt Engineering</p>
+            <p>LLM Quantization</p>
+            <p>LLM Serving</p>
+            <p>LLM Monitoring</p>
+            <p>LLM Evaluation</p>
+            <p>NLP</p>
+            <p>RAG</p>
+            <p>Machine Vision</p>
+          </div>
+          <div class="flex-1 animate-slide-up">
+            <p>Python</p>
+            <p>Pytorch</p>
+            <p>Tensorflow</p>
+            <p>Keras</p>
+            <p>Hugging Face</p>
+            <p>Architecture Design</p>
+          </div>
+          <div class="flex-1 animate-slide-left">
+            <p>AWS Boto3</p>
+            <p>Docker</p>
+            <p>OpenAI, Llama, Mistral, Gemini, Bedrock, etc.</p>
+            <p>Ollama</p>
+            <p>Redis & Kafka</p>
+            <p>PostgreSQL, MySQL, etc.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>Crafted with ❤️ by Dipesh Paul</p>
+    <a href="#" title="LinkedIn">🔗</a>
+    <a href="#" title="GitHub">🐙</a>
+    <a href="#" title="Portfolio">📅</a>
+  </footer>
+
+  <script>
+    // Initialize GSAP timeline
+    const tl = gsap.timeline();
+
+    // Logo animation
+    tl.from('.logo', {
+      duration: 1,
+      y: -50,
+      opacity: 0,
+      ease: 'power3.out'
+    });
+
+    // Profile picture animation
+    tl.from('.profile-picture', {
+      duration: 1.2,
+      x: -100,
+      opacity: 0,
+      ease: 'power3.out'
+    }, '-=0.5');
+
+    // Heading text animation - split text into lines
+    const headingLines = document.querySelectorAll('.intro-content h1 *');
+    tl.from(headingLines, {
+      duration: 1,
+      y: 50,
+      opacity: 0,
+      stagger: 0.2,
+      ease: 'power3.out'
+    }, '-=0.7');
+
+    // Social icons animation
+    tl.from('.icon-list a', {
+      duration: 0.8,
+      opacity: 0,
+      y: 20,
+      stagger: 0.1,
+      ease: 'power3.out'
+    }, '-=0.5');
+
+    // Footer animation
+    gsap.from('footer', {
+      scrollTrigger: {
+        trigger: 'footer',
+        start: 'top 90%',
+      },
+      duration: 1,
+      y: 30,
+      opacity: 0,
+      ease: 'power3.out'
+    });
+  </script>
+
+
+<script>
+    const careerItems = document.querySelectorAll(".career-item");
+    const careerImages = document.querySelectorAll(".career-right img");
+
+    careerItems.forEach(item => {
+      const careerName = item.getAttribute("data-career");
+
+      item.addEventListener("mouseenter", () => activateCareer(careerName));
+      item.addEventListener("mouseleave", () => deactivateCareer(careerName));
+
+      // Scroll Trigger for active state
+      gsap.to(item, {
+        scrollTrigger: {
+          trigger: item,
+          start: "top center",
+          onEnter: () => activateCareer(careerName),
+          onLeaveBack: () => deactivateCareer(careerName),
+        }
+      });
+    });
+
+    function activateCareer(careerName) {
+      careerItems.forEach(item => {
+        const isActive = item.getAttribute("data-career") === careerName;
+        item.classList.toggle("active", isActive);
+      });
+
+      careerImages.forEach(img => {
+        const isActive = img.getAttribute("data-career-image") === careerName;
+        img.classList.toggle("active", isActive);
+      });
+    }
+
+    function deactivateCareer(careerName) {
+      careerItems.forEach(item => {
+        if (item.getAttribute("data-career") === careerName) {
+          item.classList.remove("active");
+        }
+      });
+    }
+  </script>
+
+  <!-- Add ScrollTrigger plugin before closing body tag -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

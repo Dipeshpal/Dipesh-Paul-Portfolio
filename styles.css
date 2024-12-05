@@ -1,0 +1,152 @@
+/* Fade in animation */
+.animate-fade-in {
+  opacity: 0;
+}
+
+.animate-fade-in.start-animation {
+  animation: fadeIn 0.8s ease-in forwards;
+}
+
+/* Slide up animation */
+.animate-slide-up {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.animate-slide-up.start-animation {
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+/* Slide right animation */
+.animate-slide-right {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.animate-slide-right.start-animation {
+  animation: slideRight 0.8s ease-out forwards;
+}
+
+/* Slide left animation */
+.animate-slide-left {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.animate-slide-left.start-animation {
+  animation: slideLeft 0.8s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideRight {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Optional: Add animation delay for staggered effect */
+.technology-card:nth-child(2) { animation-delay: 0.2s; }
+.technology-card:nth-child(3) { animation-delay: 0.4s; }
+.technology-card:nth-child(4) { animation-delay: 0.6s; }
+
+
+/* Mobile-first adjustments */
+@media (max-width: 768px) {
+    body {
+      padding: 0 1rem;
+    }
+  
+    .container {
+      width: 100%;
+      padding: 0 1rem;
+    }
+  
+    header {
+      padding: 1rem 0;
+    }
+  
+    .logo {
+      position: static;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+  
+    .logo h1 {
+      font-size: 1.2rem;
+    }
+  
+    .intro {
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+  
+    .profile-picture {
+      width: 200px;
+      height: 320px; /* Adjust aspect ratio for smaller screens */
+    }
+  
+    .intro-content h1 {
+      font-size: 2rem;
+      text-align: center;
+    }
+  
+    .career {
+      flex-direction: column;
+      gap: 1rem;
+    }
+  
+    .career-left {
+      padding: 0;
+      overflow-y: visible;
+    }
+  
+    .career-item h3 {
+      font-size: 1.2rem;
+    }
+  
+    .career-right {
+      display: none; /* Hide images for simplicity */
+    }
+  
+    .technology-card {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .technology-icon {
+      width: 40px;
+      height: 40px;
+    }
+  
+    .scroll-container {
+      overflow-x: scroll;
+      padding: 1rem 0;
+    }
+  
+    footer {
+      font-size: 0.9rem;
+      padding: 1rem;
+    }
+  }
+  
